@@ -8,12 +8,12 @@ namespace StartpageApi.Data
 {
     public class MockLinkRepo : ILinkRepo
     {
-        Link ILinkRepo.GetLinkById(int id)
+        public Link GetLinkById(int id)
         {
             return new Link { id = 0, Name = "Test Link", Description = "Ein Test", HyperLink = "LINK", ImageId = 0, Clicks = 2, Important = 1 };
         }
 
-        IEnumerable<Link> ILinkRepo.GetLinks()
+        public IEnumerable<Link> GetLinks()
         {
             var Links = new List<Link>
             {
