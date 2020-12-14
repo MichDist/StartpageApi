@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using StartpageApi.Data;
 
 namespace StartpageApi
 {
@@ -28,6 +29,9 @@ namespace StartpageApi
         {
 
             services.AddControllers();
+
+            services.AddScoped<ILinkRepo, MockLinkRepo>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "StartpageApi", Version = "v1" });

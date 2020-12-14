@@ -12,7 +12,12 @@ namespace StartpageApi.Controllers
     [ApiController]
     public class LinksController : ControllerBase
     {
-        private readonly MockLinkRepo _repository = new MockLinkRepo();
+        private readonly ILinkRepo _repository;
+
+        public LinksController(ILinkRepo repository)
+        {
+            _repository = repository;
+        }
         
         [HttpGet]
         public ActionResult <IEnumerable<Link>> GetAllLinks()
