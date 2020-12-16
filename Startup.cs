@@ -18,6 +18,9 @@ namespace StartpageApi
 {
     public class Startup
     {
+        //CORS
+        readonly string AllowSpecificOrigins = "_allowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,12 +31,22 @@ namespace StartpageApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // CORS
+            services.AddCors(options =>
+                options.AddPolicy(name: AllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000");
+                    }));
+
             services.AddDbContext<StartpageContext>(opt => opt.UseSqlServer
             (Configuration.GetConnectionString("StartpageConnection")));
 
             services.AddControllers();
 
-            services.AddScoped<ILinkRepo, MockLinkRepo>();
+            services.AddScoped<ILinkRepo, SqlStartpageRepo>();
+
+            //services.AddScoped<ILinkRepo, MockLinkRepo>();
 
             services.AddSwaggerGen(c =>
             {
@@ -54,6 +67,9 @@ namespace StartpageApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            // CORS
+            app.UseCors(AllowSpecificOrigins);
 
             app.UseAuthorization();
 
