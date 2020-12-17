@@ -16,5 +16,11 @@ namespace StartpageApi.Data
 
         // Models
         public DbSet<Link> Links { get; set; }
+
+        public DbSet<Group> Groups { get; set; }
+
+        public DbSet<Statistic> Statistics { get; set; }
+
+        public DbSet<User> Users { get; set; }
     }
 }

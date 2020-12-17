@@ -10,16 +10,16 @@ namespace StartpageApi.Data
     {
         public Link GetLinkById(int id)
         {
-            return new Link { id = 0, Name = "Test Link", Description = "Ein Test", HyperLink = "LINK", ImagePath = "Test", Clicks = 2, Important = 1 };
+            return new Link { id = 0, name = "Test Link", description = "Ein Test", hyper_link = "LINK", image_path = "Test", important = 1 };
         }
 
         public IEnumerable<Link> GetLinks()
         {
             var Links = new List<Link>
             {
-                new Link { id = 0, Name = "Test Link0", Description = "Ein Test", HyperLink = "LINK", ImagePath = "Test", Clicks = 2, Important = 1 },
-                new Link { id = 1, Name = "Test Link1", Description = "Ein Test", HyperLink = "LINK", ImagePath = "Test", Clicks = 2, Important = 0 },
-                new Link { id = 2, Name = "Test Link2", Description = "Ein Test", HyperLink = "LINK", ImagePath = "Test", Clicks = 2, Important = 1 }
+                new Link { id = 0, name = "Test Link0", description = "Ein Test", hyper_link = "LINK", image_path = "Test", important = 1 },
+                new Link { id = 1, name = "Test Link1", description = "Ein Test", hyper_link = "LINK", image_path = "Test", important = 0 },
+                new Link { id = 2, name = "Test Link2", description = "Ein Test", hyper_link = "LINK", image_path = "Test", important = 1 }
         };
 
             return Links;

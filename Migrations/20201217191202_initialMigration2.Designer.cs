@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StartpageApi.Data;
 
 namespace StartpageApi.Migrations
 {
     [DbContext(typeof(StartpageContext))]
-    partial class StartpageContextModelSnapshot : ModelSnapshot
+    [Migration("20201217191202_initialMigration2")]
+    partial class initialMigration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +45,7 @@ namespace StartpageApi.Migrations
 
                     b.HasIndex("user_idid");
 
-                    b.ToTable("Groups");
+                    b.ToTable("Group");
                 });
 
             modelBuilder.Entity("StartpageApi.Models.Link", b =>
@@ -85,26 +87,6 @@ namespace StartpageApi.Migrations
                     b.ToTable("Links");
                 });
 
-            modelBuilder.Entity("StartpageApi.Models.Statistic", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("linkid")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("linkid");
-
-                    b.ToTable("Statistics");
-                });
-
             modelBuilder.Entity("StartpageApi.Models.User", b =>
                 {
                     b.Property<int>("id")
@@ -118,7 +100,7 @@ namespace StartpageApi.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("StartpageApi.Models.Group", b =>
@@ -143,15 +125,6 @@ namespace StartpageApi.Migrations
                     b.Navigation("group");
 
                     b.Navigation("user_id");
-                });
-
-            modelBuilder.Entity("StartpageApi.Models.Statistic", b =>
-                {
-                    b.HasOne("StartpageApi.Models.Link", "link")
-                        .WithMany()
-                        .HasForeignKey("linkid");
-
-                    b.Navigation("link");
                 });
 #pragma warning restore 612, 618
         }
