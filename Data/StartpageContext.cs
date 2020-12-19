@@ -22,5 +22,7 @@ namespace StartpageApi.Data
         public DbSet<Statistic> Statistics { get; set; }
 
         public DbSet<User> Users { get; set; }
+        
+        public DbSet<History> Histories { get; set; }
     }
 }
