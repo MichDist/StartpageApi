@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using StartpageApi.Data;
+using StartpageApi.Dtos;
 using StartpageApi.Models;
 using System;
 using System.Collections.Generic;
@@ -13,26 +15,32 @@ namespace StartpageApi.Controllers
     public class LinksController : ControllerBase
     {
         private readonly ILinkRepo _repository;
+        private readonly IMapper _mapper;
 
-        public LinksController(ILinkRepo repository)
+        public LinksController(ILinkRepo repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
         
         [HttpGet]
-        public ActionResult <IEnumerable<Link>> GetAllLinks()
+        public ActionResult <IEnumerable<LinkReadDto>> GetAllLinks()
         {
             var linkItems = _repository.GetLinks();
 
-            return Ok(linkItems);
+            return Ok(_mapper.Map<IEnumerable<LinkReadDto>>(linkItems));
         }
 
         [HttpGet("{id}")]
-        public ActionResult <Link> GetLinkById(int id)
+        public ActionResult <LinkReadDto> GetLinkById(int id)
         {
             var linkItem = _repository.GetLinkById(id);
 
-            return Ok(linkItem);
+            if(linkItem != null)
+            {
+                return Ok(_mapper.Map<LinkReadDto>(linkItem));
+            }
+            return NotFound();
         }
     }
 
