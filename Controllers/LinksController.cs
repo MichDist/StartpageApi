@@ -31,7 +31,7 @@ namespace StartpageApi.Controllers
             return Ok(_mapper.Map<IEnumerable<LinkReadDto>>(linkItems));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name ="GetLinkById")]
         public ActionResult <LinkReadDto> GetLinkById(int id)
         {
             var linkItem = _repository.GetLinkById(id);
@@ -42,7 +42,19 @@ namespace StartpageApi.Controllers
             }
             return NotFound();
         }
+
+        [HttpPost]
+        public ActionResult<LinkReadDto> CreateLink(LinkCreateDto linkCreateDto)
+        {
+            // Validation???
+
+            var linkModel = _mapper.Map<Link>(linkCreateDto);
+            _repository.CreateLink(linkModel);
+            _repository.SaveChanges();
+
+            var linkReadDto = _mapper.Map<LinkReadDto>(linkModel);
+
+            return CreatedAtRoute(nameof(GetLinkById), new { id = linkReadDto.id }, linkReadDto);
+        }
     }
-
-
 }

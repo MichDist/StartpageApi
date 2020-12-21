@@ -15,6 +15,16 @@ namespace StartpageApi.Data
             _context = context;
         }
 
+        public void CreateLink(Link link)
+        {
+            if(link == null)
+            {
+                throw new ArgumentNullException(nameof(link));
+            }
+
+            _context.Links.Add(link);
+        }
+
         public Link GetLinkById(int id)
         {
             return _context.Links.FirstOrDefault(p => p.id == id);
@@ -23,6 +33,11 @@ namespace StartpageApi.Data
         public IEnumerable<Link> GetLinks()
         {
             return _context.Links.ToList();
+        }
+
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);
         }
     }
 }

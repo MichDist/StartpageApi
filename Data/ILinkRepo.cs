@@ -8,7 +8,10 @@ namespace StartpageApi.Data
 {
     public interface ILinkRepo
     {
+        bool SaveChanges();
+
         IEnumerable<Link> GetLinks();
         Link GetLinkById(int id);
+        void CreateLink(Link link);
     }
 }

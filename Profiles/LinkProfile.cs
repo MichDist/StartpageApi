@@ -13,6 +13,8 @@ namespace StartpageApi.Profiles
         public LinkProfile()
         {
             CreateMap<Link, LinkReadDto>();
+
+            CreateMap<LinkCreateDto, Link>();
         }
     }
 }

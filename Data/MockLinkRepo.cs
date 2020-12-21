@@ -8,6 +8,11 @@ namespace StartpageApi.Data
 {
     public class MockLinkRepo : ILinkRepo
     {
+        public void CreateLink(Link link)
+        {
+            throw new NotImplementedException();
+        }
+
         public Link GetLinkById(int id)
         {
             return new Link { id = 0, name = "Test Link", description = "Ein Test", hyper_link = "LINK", image_path = "Test", important = 1 };
@@ -23,6 +28,11 @@ namespace StartpageApi.Data
         };
 
             return Links;
+        }
+
+        public bool SaveChanges()
+        {
+            throw new NotImplementedException();
         }
     }
 }
