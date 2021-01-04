@@ -15,6 +15,8 @@ namespace StartpageApi.Profiles
             CreateMap<Link, LinkReadDto>();
 
             CreateMap<LinkCreateDto, Link>();
+
+            CreateMap<LinkUpdateDto, Link>();
         }
     }
 }

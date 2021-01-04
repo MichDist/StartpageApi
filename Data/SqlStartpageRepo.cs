@@ -39,5 +39,10 @@ namespace StartpageApi.Data
         {
             return (_context.SaveChanges() >= 0);
         }
+
+        public void UpdateLink(Link link)
+        {
+            // DbContext does it
+        }
     }
 }

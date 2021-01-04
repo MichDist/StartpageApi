@@ -56,5 +56,24 @@ namespace StartpageApi.Controllers
 
             return CreatedAtRoute(nameof(GetLinkById), new { id = linkReadDto.id }, linkReadDto);
         }
+
+        [HttpPut("{id}")]
+        public ActionResult UpdateLink(int id, LinkUpdateDto linkUpdateDto)
+        {
+            // Check if it exists
+            var linkModelFromRepo = _repository.GetLinkById(id);
+            if(linkModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(linkUpdateDto, linkModelFromRepo);
+
+            _repository.UpdateLink(linkModelFromRepo);
+
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
