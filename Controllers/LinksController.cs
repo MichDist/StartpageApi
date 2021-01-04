@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace StartpageApi.Controllers
 {
@@ -68,6 +69,33 @@ namespace StartpageApi.Controllers
             }
 
             _mapper.Map(linkUpdateDto, linkModelFromRepo);
+
+            _repository.UpdateLink(linkModelFromRepo);
+
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        public ActionResult PartialLinkUpdate(int id, JsonPatchDocument<LinkUpdateDto> patchDoc)
+        {
+            // Check if it exists
+            var linkModelFromRepo = _repository.GetLinkById(id);
+            if (linkModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var linkToPatch = _mapper.Map<LinkUpdateDto>(linkModelFromRepo);
+
+            patchDoc.ApplyTo(linkToPatch, ModelState);
+            if(!TryValidateModel(linkToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(linkToPatch, linkModelFromRepo);
 
             _repository.UpdateLink(linkModelFromRepo);
 
