@@ -25,6 +25,16 @@ namespace StartpageApi.Data
             _context.Links.Add(link);
         }
 
+        public void DeleteLink(Link link)
+        {
+            if (link == null)
+            {
+                throw new ArgumentNullException(nameof(link));
+            }
+
+            _context.Links.Remove(link);
+        }
+
         public Link GetLinkById(int id)
         {
             return _context.Links.FirstOrDefault(p => p.id == id);

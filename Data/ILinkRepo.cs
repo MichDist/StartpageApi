@@ -14,5 +14,6 @@ namespace StartpageApi.Data
         Link GetLinkById(int id);
         void CreateLink(Link link);
         void UpdateLink(Link link);
+        void DeleteLink(Link link);
     }
 }

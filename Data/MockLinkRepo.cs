@@ -13,6 +13,11 @@ namespace StartpageApi.Data
             throw new NotImplementedException();
         }
 
+        public void DeleteLink(Link link)
+        {
+            throw new NotImplementedException();
+        }
+
         public Link GetLinkById(int id)
         {
             return new Link { id = 0, name = "Test Link", description = "Ein Test", hyper_link = "LINK", image_path = "Test", important = 1 };

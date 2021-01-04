@@ -103,5 +103,22 @@ namespace StartpageApi.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteLink(int id)
+        {
+            // Check if it exists
+            var linkModelFromRepo = _repository.GetLinkById(id);
+            if (linkModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _repository.DeleteLink(linkModelFromRepo);
+
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
